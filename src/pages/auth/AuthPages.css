@@ -1,6 +1,6 @@
 .background {
     height: 100vh;
-    background-color: #131313;
+    background-color: var(--color-background-dark);
   }
   
   .form {
@@ -23,7 +23,7 @@
   }
   
   .form__fields input {
-    border: 1px solid #D58C51;
+    border: 1px solid var(--color-accent-orange);
     border-radius: 61px;
     padding-left: 18px;
     height: 42px;
@@ -41,7 +41,7 @@
     font-size: 11px;
     font-weight: 300;
     line-height: 13.41px;
-    color: #D58C51;
+    color: var(--color-accent-orange);
     text-decoration: underline;
     margin-bottom: 15px;
     background: none;
@@ -63,7 +63,7 @@
     margin-top: 15px;
     width: 200px;
     height: 42px;
-    background-color: #D58C51;
+    background-color: var(--color-accent-orange);
     color: #131313;
     font-size: 14px;
     font-weight: 400;
@@ -73,7 +73,7 @@
     cursor: pointer;
   }
   
-  /* .error {
+  .error {
     font-size: 8px;
     line-height: 8px;
     color: #FF0B0B;
@@ -81,4 +81,4 @@
     margin-top: -5px;
     margin-bottom: 5px;
     padding-left: 18px;
-  } */
+  }
