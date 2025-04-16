@@ -1,17 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SignIn } from './pages/auth/SignIn';
-import { SignUp } from './pages/auth/SignUp';
-import { ROUTES } from './routes';
+import React from "react";
+
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./AppRoutes";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path={ROUTES.SIGN_IN} element={<SignIn />} />
-        <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
-      </Routes>
-    </Router>
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppRoutes />
+      </Provider>
+    </BrowserRouter>
   );
 };
 
