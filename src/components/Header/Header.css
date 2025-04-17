@@ -1,0 +1,43 @@
+.header {
+    background-color: var(--color-background-dark);
+    padding: 16px;
+  }
+  
+  .header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header__logo {
+    height: 40px;
+    width: auto;
+  }
+  
+  .header__right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .header__btn {
+    color: var(--color-accent-orange);
+    cursor: pointer;
+    font-size: 16px;
+    transition: ease-in 0.1s;
+  }
+  
+  .header__btn:hover {
+    text-decoration: underline;
+  }
+  
+  .exit {
+    width: 120px;
+    height: 40px;
+    border: 1px solid var(--color-accent-orange);
+  }
+  
+  .header__user {
+    color: white;
+    font-weight: bold;
+  }

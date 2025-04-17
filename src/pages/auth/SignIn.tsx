@@ -1,24 +1,58 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes';
-import './AuthPages.css'; 
+import { AuthForm } from './AuthForm';
 
 export const SignIn: React.FC = () => {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({ login: '', password: '', common: '' });
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors = {
+      login: login.trim() ? '' : 'Введите логин',
+      password: password.trim() ? '' : 'Введите пароль',
+      common: ''
+    };
+
+    if (newErrors.login || newErrors.password) {
+      setErrors(newErrors);
+      return;
+    }
+
+    const storedUser = localStorage.getItem('user');
+    if (!storedUser) {
+      setErrors({ ...newErrors, common: 'Пользователь не найден' });
+      return;
+    }
+
+    const { login: storedLogin, password: storedPassword } = JSON.parse(storedUser);
+
+    if (login !== storedLogin || password !== storedPassword) {
+      setErrors({ ...newErrors, common: 'Неправильный логин или пароль' });
+      return;
+    }
+
+    localStorage.setItem('isAuthenticated', 'true');
+    navigate(ROUTES.HOME);
+  };
+
   return (
-    <div className="background">
-      <form className="form">
-      <Link to={ROUTES.SIGN_UP} className="form__signs">Зарегистрироваться</Link>
-        <h1 className="form__title">ВХОД</h1>
-        <div className="form__fields input">
-          <input type="text" name="login" placeholder="Логин" />
-          <span className="error"> </span>
-
-          <input type="password" name="password" placeholder="Пароль" />
-          <span className="error"> </span>
-
-          <button type="submit" className="form__btn">Войти</button>
-        </div>
-      </form>
-    </div>
+    <AuthForm
+      title="ВХОД"
+      buttonText="Войти"
+      linkText="Зарегистрироваться"
+      linkTo={ROUTES.SIGN_UP}
+      login={login}
+      password={password}
+      errors={errors}
+      onLoginChange={setLogin}
+      onPasswordChange={setPassword}
+      onSubmit={handleSubmit}
+    />
   );
 };
