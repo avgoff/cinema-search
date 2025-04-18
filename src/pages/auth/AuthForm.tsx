@@ -10,8 +10,8 @@ interface AuthFormProps {
   login: string;
   password: string;
   errors: { login: string; password: string; common?: string };
-  onLoginChange: (value: string) => void;
-  onPasswordChange: (value: string) => void;
+  onLoginChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
 }
 
@@ -37,7 +37,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
             type="text"
             placeholder="Логин"
             value={login}
-            onChange={(e) => onLoginChange(e.target.value)}
+            onChange={onLoginChange}
           />
           <span className="error">{errors.login}</span>
 
@@ -45,7 +45,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
             type="password"
             placeholder="Пароль"
             value={password}
-            onChange={(e) => onPasswordChange(e.target.value)}
+            onChange={onPasswordChange}
           />
           <span className="error">{errors.password}</span>
 

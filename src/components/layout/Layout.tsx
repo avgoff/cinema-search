@@ -11,7 +11,7 @@ import { Header } from "../Header/Header";
 import Search from "../search/Search";
 import Filter from "../filter/Filter";
 
-const Layout = () => {
+export const Layout = () => {
   const dispatch = useAppDispatch();
   const genres = useAppSelector(selectGenres);
   const countries = useAppSelector(selectCountries);
@@ -37,4 +37,3 @@ const Layout = () => {
   );
 };
 
-export default Layout;

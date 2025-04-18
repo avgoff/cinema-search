@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../routes';
+import { ROUTES } from '../../constants/routes';
 import { AuthForm } from './AuthForm';
+import { signInSchema } from './authSchemas';
+import { STORAGE_KEYS } from '../../constants/storageKeys';
 
 export const SignIn: React.FC = () => {
   const [login, setLogin] = useState('');
@@ -10,34 +12,44 @@ export const SignIn: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLogin(e.target.value);
+    setErrors(prev => ({ ...prev, login: '' }));
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setErrors(prev => ({ ...prev, password: '' }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newErrors = {
-      login: login.trim() ? '' : 'Введите логин',
-      password: password.trim() ? '' : 'Введите пароль',
-      common: ''
-    };
+    const result = signInSchema.safeParse({ login, password });
 
-    if (newErrors.login || newErrors.password) {
-      setErrors(newErrors);
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors({
+        login: fieldErrors.login?.[0] || '',
+        password: fieldErrors.password?.[0] || '',
+        common: '',
+      });
       return;
     }
 
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem(STORAGE_KEYS.USER);
     if (!storedUser) {
-      setErrors({ ...newErrors, common: 'Пользователь не найден' });
+      setErrors({ login: '', password: '', common: 'Пользователь не найден' });
       return;
     }
 
     const { login: storedLogin, password: storedPassword } = JSON.parse(storedUser);
-
     if (login !== storedLogin || password !== storedPassword) {
-      setErrors({ ...newErrors, common: 'Неправильный логин или пароль' });
+      setErrors({ login: '', password: '', common: 'Неправильный логин или пароль' });
       return;
     }
 
-    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem(STORAGE_KEYS.IS_AUTH, 'true');
     navigate(ROUTES.HOME);
   };
 
@@ -50,8 +62,8 @@ export const SignIn: React.FC = () => {
       login={login}
       password={password}
       errors={errors}
-      onLoginChange={setLogin}
-      onPasswordChange={setPassword}
+      onLoginChange={handleLoginChange}
+      onPasswordChange={handlePasswordChange}
       onSubmit={handleSubmit}
     />
   );

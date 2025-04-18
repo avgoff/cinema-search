@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../routes';
+import { ROUTES } from '../../constants/routes';
 import { AuthForm } from './AuthForm';
+import { signUpSchema } from './authSchemas';
+import { STORAGE_KEYS } from '../../constants/storageKeys';
 
 export const SignUp: React.FC = () => {
   const [login, setLogin] = useState('');
@@ -10,31 +12,31 @@ export const SignUp: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLogin(e.target.value);
+    setErrors(prev => ({ ...prev, login: '' }));
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setErrors(prev => ({ ...prev, password: '' }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const trimmedLogin = login.trim();
-    const trimmedPassword = password.trim();
+    const result = signUpSchema.safeParse({ login, password });
 
-    const newErrors = {
-      login: !trimmedLogin
-        ? 'Логин обязателен'
-        : trimmedLogin.length < 3
-        ? 'Логин должен содержать минимум 3 символа'
-        : '',
-      password: !trimmedPassword
-        ? 'Пароль обязателен'
-        : trimmedPassword.length < 6
-        ? 'Пароль должен быть не менее 6 символов'
-        : '',
-    };
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors({
+        login: fieldErrors.login?.[0] || '',
+        password: fieldErrors.password?.[0] || '',
+      });
+      return;
+    }
 
-    setErrors(newErrors);
-
-    if (newErrors.login || newErrors.password) return;
-
-    const userData = { login, password };
-    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify({ login, password }));
     navigate(ROUTES.SIGN_IN);
   };
 
@@ -47,8 +49,8 @@ export const SignUp: React.FC = () => {
       login={login}
       password={password}
       errors={errors}
-      onLoginChange={setLogin}
-      onPasswordChange={setPassword}
+      onLoginChange={handleLoginChange}
+      onPasswordChange={handlePasswordChange}
       onSubmit={handleSubmit}
     />
   );
