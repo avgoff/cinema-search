@@ -9,7 +9,7 @@ import { selectCountries } from "../../redux/slices/countrieSlice";
 import { Header } from "../Header/Header";
 
 import Search from "../search/Search";
-import Filter from "../filter/Filter";
+import { Filter } from "../filter/Filter";
 
 export const Layout = () => {
   const dispatch = useAppDispatch();
@@ -17,8 +17,8 @@ export const Layout = () => {
   const countries = useAppSelector(selectCountries);
 
   useEffect(() => {
-    dispatch(fetchGenres()); //пусть пока тут загружаются жанры
-    dispatch(fetchCountries()); //пусть пока тут загружаются страны
+    dispatch(fetchGenres());
+    dispatch(fetchCountries()); 
   }, [dispatch]);
 
   return (

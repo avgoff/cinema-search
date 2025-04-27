@@ -3,16 +3,15 @@ import { Genre } from "../../types/genre";
 import { fetchGenres } from "../thunks/fetchGenres";
 import { RootState } from "../store";
 
-interface GenreState {
+type GenreState = {
   genres: Genre[];
   isLoading: boolean;
-  error: string | null;
+  error?: string;
 }
 
 const initialState: GenreState = {
   genres: [],
   isLoading: false,
-  error: null,
 };
 
 const genreSlice = createSlice({
@@ -27,7 +26,6 @@ const genreSlice = createSlice({
     builder
       .addCase(fetchGenres.pending, (state) => {
         state.isLoading = true;
-        state.error = null;
       })
       .addCase(fetchGenres.fulfilled, (state, action) => {
         state.genres = action.payload;

@@ -3,16 +3,15 @@ import { Country } from "../../types/country";
 import { fetchCountries } from "../thunks/fetchCountries";
 import { RootState } from "../store";
 
-interface CountrieState {
+type CountrieState = {
   countries: Country[];
   isLoading: boolean;
-  error: string | null;
+  error?: string;
 }
 
 const initialState: CountrieState = {
   countries: [],
   isLoading: false,
-  error: null,
 };
 
 const countrieSlice = createSlice({
@@ -27,7 +26,6 @@ const countrieSlice = createSlice({
     builder
       .addCase(fetchCountries.pending, (state) => {
         state.isLoading = true;
-        state.error = null;
       })
       .addCase(fetchCountries.fulfilled, (state, action) => {
         state.countries = action.payload;
