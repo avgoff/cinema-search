@@ -1,26 +1,57 @@
-import React from 'react';
-import { Link } from "react-router-dom";
-import { ROUTES } from '../../routes';
-import './AuthPages.css'; 
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../constants/routes';
+import { AuthForm } from './AuthForm';
+import { signUpSchema } from './authSchemas';
+import { STORAGE_KEYS } from '../../constants/storageKeys';
 
 export const SignUp: React.FC = () => {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({ login: '', password: '' });
+
+  const navigate = useNavigate();
+
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLogin(e.target.value);
+    setErrors(prev => ({ ...prev, login: '' }));
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setErrors(prev => ({ ...prev, password: '' }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const result = signUpSchema.safeParse({ login, password });
+
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors({
+        login: fieldErrors.login?.[0] || '',
+        password: fieldErrors.password?.[0] || '',
+      });
+      return;
+    }
+
+    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify({ login, password }));
+    navigate(ROUTES.SIGN_IN);
+  };
+
   return (
-    <div className="background">
-      <form className="form">
-      <Link to={ROUTES.SIGN_IN} className="form__signs">Авторизоваться</Link>
-        <h1 className="form__title">РЕГИСТРАЦИЯ</h1>
-        <div className="form__fields input">
-          <input type="text" name="login" placeholder="Логин" />
-          {}
-          <span className="error"> </span>
-
-          <input type="password" name="password" placeholder="Пароль" />
-          {}
-          <span className="error"> </span>
-
-          <button type="submit" className="form__btn">Зарегистрироваться</button>
-        </div>
-      </form>
-    </div>
+    <AuthForm
+      title="РЕГИСТРАЦИЯ"
+      buttonText="Зарегистрироваться"
+      linkText="Авторизоваться"
+      linkTo={ROUTES.SIGN_IN}
+      login={login}
+      password={password}
+      errors={errors}
+      onLoginChange={handleLoginChange}
+      onPasswordChange={handlePasswordChange}
+      onSubmit={handleSubmit}
+    />
   );
 };
