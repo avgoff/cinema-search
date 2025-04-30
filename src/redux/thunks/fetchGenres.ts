@@ -8,7 +8,7 @@ export const fetchGenres = createAsyncThunk<Genre[]>(
   "genres/fetchGenres",
   async () => {
     const response = await fetch(
-      `${BASE_URL}/movie/possible-values-by-field?field=genres.name`,
+      `${BASE_URL}/v1/movie/possible-values-by-field?field=genres.name`,
       {
         headers: {
           "X-API-KEY": apiKey,
@@ -21,7 +21,6 @@ export const fetchGenres = createAsyncThunk<Genre[]>(
     }
 
     const data = await response.json();
-
     return data as Genre[];
   }
 );

@@ -7,7 +7,7 @@ type GenreState = {
   genres: Genre[];
   isLoading: boolean;
   error?: string;
-}
+};
 
 const initialState: GenreState = {
   genres: [],
@@ -40,4 +40,4 @@ const genreSlice = createSlice({
 
 export const { setGenres } = genreSlice.actions;
 export const selectGenres = (state: RootState) => state.genres.genres;
-export default genreSlice.reducer;
+export const genreReducer = genreSlice.reducer;

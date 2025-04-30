@@ -16,6 +16,7 @@
     "react-hook-form": "^7.55.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.0",
+    "redux-persist": "^6.0.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {
