@@ -10,7 +10,7 @@ type SearchInputProps = {
   children?: React.ReactNode;
 };
 
-export const SearchInput = ({ initialValue = "", onFocus, children }: SearchInputProps) => {
+export const SearchInput = ({ initialValue = "", onFocus }: SearchInputProps) => {
   const [inputValue, setInputValue] = useState(initialValue);
   const navigate = useNavigate();
   const location = useLocation();

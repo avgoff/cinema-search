@@ -4,5 +4,6 @@ export const ROUTES = {
   SIGN_UP: '/signup',
   SEARCH: '/search',
   FAVORITES: '/favorites',
-  HISTORY: '/history'
+  HISTORY: '/history',
+  MOVIE: '/movie/:id',
 };

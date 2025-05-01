@@ -7,6 +7,7 @@ import { SignUp } from "./pages/auth/SignUp";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { HistoryPage } from "./pages/HistoryPage/HistoryPage";
 import { SearchPage } from "./pages/SearchPage/SearchPage";
+import { MoviePage } from './pages/MoviePage/MoviePage';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ export const AppRoutes: React.FC = () => {
         <Route path={ROUTES.FAVORITES} element={<FavoritesPage />} />
         <Route path={ROUTES.HISTORY} element={<HistoryPage />} />
         <Route path={ROUTES.SEARCH} element={<SearchPage />} />
+        <Route path={ROUTES.MOVIE} element={<MoviePage />} />
       </Route>
 
       <Route path="*" element={<div>404 - Страница не найдена</div>} />

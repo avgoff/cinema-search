@@ -11,7 +11,7 @@ export const fetchMoviesBySearch = createAsyncThunk<Movie[], { query?: string; f
       const url = new URL(`${BASE_URL}/v1.4/movie`);
       url.searchParams.append("page", "1");
       url.searchParams.append("limit", "10");
-      url.searchParams.append("selectFields", "id,name,poster.url,year");
+      url.searchParams.append("selectFields", "id,name,poster,year,description,genres");
 
       if (query) {
         url.searchParams.append("query", query);

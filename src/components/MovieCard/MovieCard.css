@@ -34,19 +34,15 @@
     color: gray;
     margin-bottom: 0.5rem;
   }
+
+  .movie-card__genres {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
   
-  .movie-card__like-button {
-    background: none;
-    border: 1px solid #007aff;
-    color: #007aff;
-    border-radius: 6px;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.9rem;
+  .movie-card__details-link {
+    color: gray;
+    font-size: 0.85rem;
     cursor: pointer;
   }
-  
-  .movie-card__like-button.liked {
-    background-color: #007aff;
-    color: white;
-  }
-  
