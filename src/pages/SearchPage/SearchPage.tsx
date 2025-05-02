@@ -15,11 +15,15 @@ const SearchPage = () => {
   const genre = getParam("genre");
 
   useEffect(() => {
-    dispatch(fetchMoviesBySearch({ 
-      query, 
-      filters: { ...(year && { year }), ...(genre && { genre }) } 
-    }));
+    if (query || year || genre) {
+      dispatch(fetchMoviesBySearch({ 
+        query: query || undefined,
+        year: year || undefined,
+        genre: genre || undefined
+      }));
+    }
   }, [dispatch, query, year, genre]);
+  
 
   if (loading) return <div className="container">Загрузка...</div>;
   if (error) return <div className="container">Ошибка: {error}</div>;

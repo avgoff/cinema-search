@@ -11,6 +11,3 @@ export type Movie = {
   description?: string;
   genres?: Genre[];
 };
-
-
-  
