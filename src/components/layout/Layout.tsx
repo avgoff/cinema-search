@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { fetchGenres } from "../../redux/thunks/fetchGenres";
 import { selectGenres } from "../../redux/slices/genreSlice";
 import { Header } from "../Header/Header";

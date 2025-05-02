@@ -7,7 +7,7 @@ import { selectSelectedMovie, selectSelectedMovieError, selectSelectedMovieLoadi
 import { LikeButton } from "../../components/LikeButton/LikeButton";
 import "./MoviePage.css";
 
-export const MoviePage: React.FC = () => {
+const MoviePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const movie = useSelector(selectSelectedMovie);
@@ -46,3 +46,5 @@ export const MoviePage: React.FC = () => {
     </div>
   );
 };
+
+export default MoviePage;

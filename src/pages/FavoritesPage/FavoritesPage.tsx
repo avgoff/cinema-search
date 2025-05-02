@@ -1,11 +1,11 @@
 import React from "react";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks/hooks";
 import { selectFavorites } from "../../redux/slices/favoritesSlice";
 import { MovieCard } from "../../components/MovieCard/MovieCard";
 import { Movie } from "../../types/movie";
 import "./FavoritesPage.css";
 
-export const FavoritesPage: React.FC = () => {
+const FavoritesPage: React.FC = () => {
   const favorites: Movie[] = useAppSelector(selectFavorites);
 
   return (
@@ -14,7 +14,7 @@ export const FavoritesPage: React.FC = () => {
       {favorites.length > 0 ? (
         <div className="favorites-page__list">
           {favorites.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} isFavoritePage />
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       ) : (
@@ -23,3 +23,5 @@ export const FavoritesPage: React.FC = () => {
     </div>
   );
 };
+
+export default FavoritesPage;

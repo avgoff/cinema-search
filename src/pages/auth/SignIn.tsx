@@ -5,7 +5,7 @@ import { AuthForm } from './AuthForm';
 import { signInSchema } from './authSchemas';
 import { STORAGE_KEYS } from '../../constants/storageKeys';
 
-export const SignIn: React.FC = () => {
+const SignIn: React.FC = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ login: '', password: '', common: '' });
@@ -68,3 +68,5 @@ export const SignIn: React.FC = () => {
     />
   );
 };
+
+export default SignIn;

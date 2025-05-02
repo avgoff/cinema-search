@@ -1,6 +1,6 @@
 import React from "react";
 import { Movie } from "../../types/movie";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { addFavorite, removeFavorite, selectFavorites, } from "../../redux/slices/favoritesSlice";
 import "./LikeButton.css";
 

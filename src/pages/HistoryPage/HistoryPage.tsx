@@ -1,9 +1,9 @@
 import React from "react";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks/hooks";
 import { selectHistory } from "../../redux/slices/historySlice";
 import "./HistoryPage.css";
 
-export const HistoryPage: React.FC = () => {
+const HistoryPage: React.FC = () => {
   const history = useAppSelector(selectHistory);
 
   return (
@@ -23,3 +23,5 @@ export const HistoryPage: React.FC = () => {
     </div>
   );
 };
+
+export default HistoryPage;

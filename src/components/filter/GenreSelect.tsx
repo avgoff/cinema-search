@@ -13,7 +13,7 @@ export const GenreSelect = ({ genres, register }: Props) => {
       <label className="filter-form__label">Жанр</label>
       <select className="filter-form__select" {...register("genre")}>
         {genres.map((genres) => (
-          <option className="filter-form__option" key={genres.slug} value={genres.slug}>
+          <option className="filter-form__option" key={genres.slug} value={genres.name}>
           {genres.name}
         </option>  
         ))}

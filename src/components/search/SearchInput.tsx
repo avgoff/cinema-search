@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks/hooks";
 import { addToHistory } from "../../redux/slices/historySlice";
 import "./SearchInput.css";
 
