@@ -1,0 +1,14 @@
+.like-button {
+    border: 1px solid #007aff;
+    color: #007aff;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 150px;
+  }
+  
+  .like-button.liked {
+    background-color: #007aff;
+    color: white;
+  }

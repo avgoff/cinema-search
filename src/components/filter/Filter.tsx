@@ -1,58 +1,41 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { Genre } from "../../types/genre";
-import { Country } from "../../types/country";
-import "./Filter.less";
 import { IFormInput } from "../../types/forms";
-
 import { GenreSelect } from "./GenreSelect";
-import { CountrySelect } from "./CountrySelect";
 import { YearSelect } from "./YearSelect";
-import { AgeRatingSelect } from "./AgeRatingSelect";
-import { RatingKpInput } from "./RatingKpInput";
-import { RatingImdbInput } from "./RatingImdbInput";
+import { useQueryParams } from "../../redux/hooks/useQueryParams";
+
+import "./Filter.less";
 
 type FormProps = {
   genres: Genre[];
-  countries: Country[];
-}
+};
 
-export const Filter = ({ genres, countries }: FormProps) => {
+export const Filter = ({ genres }: FormProps) => {
   const { register, handleSubmit } = useForm<IFormInput>();
-  const navigate = useNavigate();
+  const { setParams } = useQueryParams();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const query = new URLSearchParams(data).toString();
-    navigate(`/search?${query}`);
+    setParams({
+      year: data.year || undefined,
+      genre: data.genre || undefined,
+    });
   };
-
   return (
     <form className="filter-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="filter-form__box-input">
-        <YearSelect register={register} />
+      <div className="filter-form__content">
+        <div className="filter-form__column">
+          <YearSelect register={register} />
+        </div>
+        <div className="filter-form__column">
+          <GenreSelect register={register} genres={genres} />
+        </div>
+        <div className="filter-form__apply">
+          <button className="filter-form__apply-button" type="submit">
+            Применить фильтры
+          </button>
+        </div>
       </div>
-
-      <div className="filter-form__box-input">
-        <GenreSelect register={register} genres={genres} />
-      </div>
-
-      <div className="filter-form__box-input">
-        <CountrySelect register={register} countries={countries} />
-      </div>
-
-      <div className="filter-form__box-input">
-        <RatingKpInput register={register} />
-      </div>
-
-      <div className="filter-form__box-input">
-        <RatingImdbInput register={register} />
-      </div>
-
-      <div className="filter-form__box-input">
-        <AgeRatingSelect register={register} />
-      </div>
-
-      <input className="filter-form__submit" type="submit" value="Search" />
     </form>
   );
 };

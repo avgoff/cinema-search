@@ -15,6 +15,14 @@ export const Header: React.FC = () => {
       localStorage.removeItem(STORAGE_KEYS.USER);
       navigate(ROUTES.HOME);
    };
+
+   const goToFavorites = () => {
+    navigate(ROUTES.FAVORITES);
+  };
+
+  const goToHistory = () => {
+    navigate(ROUTES.HISTORY);
+  };
   
     return (
         <header className="header">
@@ -26,8 +34,8 @@ export const Header: React.FC = () => {
             {login ? (
               <>
                 <span className="header__user">{login}</span>
-                <button className="header__btn">Избранное</button>
-                <button className="header__btn">История</button>
+                <button onClick={goToFavorites} className="header__btn">Избранное</button>
+                <button onClick={goToHistory} className="header__btn">История</button>
                 <button onClick={handleLogout} className="header__btn exit">Выйти</button>
               </>
             ) : (

@@ -1,9 +1,67 @@
 .filter-form {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background-color: #fff;
+  width: 100%;
+  max-width: 700px;
+  margin-top: 20px;
+  border: 1px solid var(--color-background-dark);
+  border-radius: 8px;
+}
+
+.filter-form__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
 }
 
-.filter-form__box-input {
+.filter-form__column {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 200px;
+}
+
+.filter-form__apply {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.filter-form__apply-button {
+  background-color: var(--color-accent-orange);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.filter-form__apply-button:hover {
+  background-color: #0a4b3c;
+}
+
+.filter-form__label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.filter-form__select {
+  padding: 8px 12px;
+  border: 1px solid var(--color-background-dark);
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.xfilter-popup__options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
 }

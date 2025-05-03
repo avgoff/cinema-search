@@ -1,0 +1,48 @@
+.movie-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: box-shadow 0.3s;
+  }
+  
+  .movie-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .movie-card__image {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+  }
+  
+  .movie-card__info {
+    padding: 0.5rem;
+  }
+  
+  .movie-card__title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .movie-card__year {
+    font-size: 0.9rem;
+    color: gray;
+    margin-bottom: 0.5rem;
+  }
+
+  .movie-card__genres {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+  
+  .movie-card__details-link {
+    color: gray;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }

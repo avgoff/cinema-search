@@ -1,39 +1,39 @@
-import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { Outlet } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { fetchGenres } from "../../redux/thunks/fetchGenres";
-import { fetchCountries } from "../../redux/thunks/fetchCountries";
 import { selectGenres } from "../../redux/slices/genreSlice";
-import { selectCountries } from "../../redux/slices/countrieSlice";
-
 import { Header } from "../Header/Header";
-
-import Search from "../search/Search";
+import { SearchInput } from "../search/SearchInput";
 import { Filter } from "../filter/Filter";
+
 
 export const Layout = () => {
   const dispatch = useAppDispatch();
   const genres = useAppSelector(selectGenres);
-  const countries = useAppSelector(selectCountries);
 
   useEffect(() => {
     dispatch(fetchGenres());
-    dispatch(fetchCountries()); 
   }, [dispatch]);
 
   return (
-    <main className="container">
+    <main>
       <Header />
+      <div className="container">
+        <h1>Добро пожаловать!</h1>
+        <p>
+          Используйте поле поиска ниже, чтобы найти фильмы по названию, жанру или году выпуска.
+        </p>
 
-      <Outlet />
-
-      <Search />
-      {genres.length > 0 && countries.length > 0 ? (
-        <Filter genres={genres} countries={countries} />
+        <SearchInput />
+          {genres.length > 0 ? (
+        <Filter genres={genres} />
       ) : (
-        <span>Loader</span>
+        <span className="filter-loading">Загрузка фильтров</span>
       )}
+
+      </div>
+      <Outlet />
     </main>
   );
 };
-

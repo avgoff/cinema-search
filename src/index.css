@@ -99,3 +99,14 @@ input {
   box-shadow: none;
   appearance: none;  
 }
+
+.container {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.filter-loading {
+  color: gray;
+  max-width: 600px;
+}

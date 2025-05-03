@@ -1,0 +1,26 @@
+.history-page__title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.history-page__list {
+  list-style: none;
+  padding: 0;
+}
+
+.history-page__item {
+  padding: 10px;
+  background-color: #f1f1f1;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.history-page__item:hover {
+  background-color: #e0e0e0;
+}
+
+.history-page__empty {
+  font-size: 18px;
+  color: gray;
+}

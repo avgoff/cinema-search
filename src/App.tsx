@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
@@ -10,7 +10,9 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <AppRoutes />
+      <ErrorBoundary>
+          <AppRoutes />
+      </ErrorBoundary>
       </Provider>
     </BrowserRouter>
   );

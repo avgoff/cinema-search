@@ -1,0 +1,17 @@
+.favorites-page__title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.favorites-page__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.favorites-page__empty {
+  font-size: 18px;
+  color: gray;
+}
+
+  

@@ -5,7 +5,7 @@ import { AuthForm } from './AuthForm';
 import { signUpSchema } from './authSchemas';
 import { STORAGE_KEYS } from '../../constants/storageKeys';
 
-export const SignUp: React.FC = () => {
+const SignUp: React.FC = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ login: '', password: '' });
@@ -55,3 +55,4 @@ export const SignUp: React.FC = () => {
     />
   );
 };
+export default SignUp;
